@@ -9,79 +9,52 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [code, setCode] = useState(`function sum() {
-  return 1 + 1;
-}`);
-  const [review, setReview] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [code, setCode] = useState(``);
+
+  const [review, setReview] = useState(``);
 
   useEffect(() => {
     prism.highlightAll();
   }, []);
 
-  const reviewCode = async () => {
-    try {
-      setLoading(true);
-      setError("");
-      setReview("");
-
-      const response = await axios.post(
-        "http://localhost:3000/ai/review",
-        { code },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      // ✅ Make sure backend returns { review: "..." }
-      setReview(response.data.review || "No review received.");
-    } catch (err) {
-      console.error(err);
-      setError("Failed to get code review. Check backend.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  async function reviewCode() {
+    const response = await axios.post("http://localhost:3000/ai/get-review", {
+      code,
+    });
+    setReview(response.data.review);
+  }
 
   return (
-    <main>
-      <div className="left">
-        <div className="code">
-          <Editor
-            value={code}
-            onValueChange={(code) => setCode(code)}
-            highlight={(code) =>
-              prism.highlight(code, prism.languages.javascript, "javascript")
-            }
-            padding={12}
-            style={{
-              fontFamily: '"Fira Code", monospace',
-              fontSize: 16,
-              border: "1px solid #ddd",
-              borderRadius: "5px",
-              minHeight: "100%",
-              width: "100%",
-            }}
-          />
+    <>
+      <main>
+        <div className="left">
+          <div className="code">
+            <Editor
+              value={code}
+              onValueChange={(code) => setCode(code)}
+              highlight={(code) =>
+                prism.highlight(code, prism.languages.javascript, "javascript")
+              }
+              padding={10}
+              style={{
+                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontSize: 16,
+                border: "1px solid #ddd",
+                borderRadius: "5px",
+                height: "100%",
+                width: "100%",
+              }}
+            />
+          </div>
+          <div onClick={reviewCode} className="review">
+            Review
+          </div>
         </div>
-
-        {/* ✅ Proper button */}
-        <button className="review" onClick={reviewCode} disabled={loading}>
-          {loading ? "Reviewing..." : "Review"}
-        </button>
-      </div>
-
-      <div className="right">
-        {error && <p style={{ color: "red" }}>{error}</p>}
-
-        {review && (
+        <div className="right">
           <Markdown rehypePlugins={[rehypeHighlight]}>{review}</Markdown>
-        )}
-      </div>
-    </main>
+        </div>
+      </main>
+    </>
   );
 }
 
