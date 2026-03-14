@@ -9,8 +9,6 @@ exports.getReview = async (req, res) => {
     }
 
     const review = await generateReview(code);
-
-    // 🔥 IMPORTANT: return key must be `review`
     res.json({ review });
   } catch (error) {
     console.error(error);
