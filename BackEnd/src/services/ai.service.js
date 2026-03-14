@@ -81,12 +81,12 @@ const model = genAI.getGenerativeModel({
     `,
 });
 
-async function generateContent(prompt) {
-  const result = await model.generateContent(prompt);
+async function generateReview(prompt) {
+  const result = await model.generateReview(prompt);
 
   console.log(result.response.text());
 
   return result.response.text();
 }
 
-module.exports = generateContent;
+module.exports = generateReview;
