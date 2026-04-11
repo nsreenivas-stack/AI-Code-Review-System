@@ -241,3 +241,6 @@ The AI is given a **system prompt** that instructs it to behave like a senior de
 ## 🙌 Author
 
 Built with ❤️ using React, Node.js, and Google Gemini AI.
+
+## 🚀 Live Demo
+👉 [Click here to view the live app](https://your-vercel-url.vercel.app)
