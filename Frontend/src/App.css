@@ -54,3 +54,6 @@ main .right {
   overflow: auto;
   color: #e0e0e0;
 }
+main .right * {
+  color: #e0e0e0 !important;
+}
