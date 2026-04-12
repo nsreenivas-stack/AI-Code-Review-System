@@ -147,3 +147,33 @@ main .right strong {
   color: #e0e0e0 !important;
   font-weight: 500 !important;
 }
+.language-bar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid #2a2a3a;
+  flex-wrap: wrap;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid #2a2a3a;
+  color: #666;
+  padding: 0.25rem 0.8rem;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Inter', system-ui, sans-serif;
+  transition: all 0.2s ease;
+}
+
+.lang-btn:hover {
+  border-color: #7c6fff;
+  color: #abb2bf;
+}
+
+.lang-btn.active {
+  background: #7c6fff;
+  border-color: #7c6fff;
+  color: #ffffff;
+}
