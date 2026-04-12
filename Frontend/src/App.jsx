@@ -6,11 +6,6 @@ import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
 import axios from "axios";
 import "./App.css";
-import Prism from "prismjs";
-import "prismjs/components/prism-python";
-import "prismjs/components/prism-java";
-import "prismjs/components/prism-cpp";
-import "prismjs/components/prism-c";
 
 const languages = [
   { label: "JavaScript", value: "javascript" },
@@ -24,18 +19,32 @@ function App() {
   const [code, setCode] = useState(``);
   const [review, setReview] = useState(``);
   const [language, setLanguage] = useState("javascript");
+  const [prism, setPrism] = useState(null);
+
+  useEffect(() => {
+    const loadPrism = async () => {
+      const Prism = (await import("prismjs")).default;
+      if (language === "python") await import("prismjs/components/prism-python");
+      if (language === "java") await import("prismjs/components/prism-java");
+      if (language === "cpp") await import("prismjs/components/prism-cpp");
+      if (language === "c") await import("prismjs/components/prism-c");
+      setPrism(Prism);
+    };
+    loadPrism();
+  }, [language]);
 
   async function reviewCode() {
-    const response = await axios.post("https://code-review-backend-iyev.onrender.com/ai/review", {
-      code,
-      language,
-    });
+    const response = await axios.post(
+      "https://code-review-backend-iyev.onrender.com/ai/review",
+      { code, language }
+    );
     setReview(response.data.review);
   }
 
   const highlightCode = (code) => {
-    const grammar = Prism.languages[language] || Prism.languages.javascript;
-    return Prism.highlight(code, grammar, language);
+    if (!prism) return code;
+    const grammar = prism.languages[language] || prism.languages.javascript;
+    return prism.highlight(code, grammar, language);
   };
 
   return (
