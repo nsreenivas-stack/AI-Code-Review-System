@@ -1,59 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500&display=swap');
+
 * {
-  margin: 0%;
-  padding: 0%;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
+
 html,
 body,
 #root {
   height: 100%;
   width: 100%;
+  background-color: #0f0f13;
 }
+
 main {
   height: 100%;
   width: 100%;
-  padding: 1.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+}
+
+.topbar span {
+  font-size: 13px;
+  color: #555;
+  letter-spacing: 0.05em;
+}
+
+.panels {
   display: flex;
   gap: 1rem;
+  flex: 1;
+  overflow: hidden;
 }
+
 main .left,
 main .right {
-  height: 100%;
-  flex-basis: 50%;
-  border-radius: 0.7rem;
-}
-main .left {
-  background-color: #000000;
+  flex: 1;
+  background-color: #13131a;
+  border-radius: 10px;
+  border: 1px solid #2a2a3a;
+  overflow: hidden;
   position: relative;
 }
+
+.panel-label {
+  font-size: 11px;
+  color: #555;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.8rem 1rem 0.4rem;
+}
+
 .left .code,
 .code pre,
 .code pre code {
-  height: 100%;
+  height: calc(100% - 2.5rem);
   width: 100%;
   margin: 0;
-  border-radius: 0.7rem;
-  background-color: #0c0c0c;
+  background-color: #13131a;
+  font-family: 'Fira Code', monospace !important;
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+  color: #abb2bf !important;
 }
+
 main .left .review {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  background-color: rgb(219, 219, 255);
-  color: #000000;
-  padding: 0.5rem 2rem;
+  background: #7c6fff;
+  color: #ffffff;
+  padding: 0.45rem 1.4rem;
   font-weight: 500;
+  font-size: 13px;
   cursor: pointer;
   user-select: none;
-  border-radius: 0.7rem;
+  border-radius: 8px;
+  letter-spacing: 0.03em;
+  transition: background 0.2s ease;
 }
+
+main .left .review:hover {
+  background: #6c5ce7;
+}
+
 main .right {
-  background-color: #343434;
-  padding: 1rem 2rem;
-  font-size: 0.95rem;
+  padding: 0.5rem 1rem 1rem;
   overflow: auto;
-  color: #e0e0e0;
 }
+
 main .right * {
+  color: #abb2bf !important;
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+}
+
+main .right h1,
+main .right h2,
+main .right h3 {
+  color: #c678dd !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  margin: 12px 0 6px !important;
+}
+
+main .right code {
+  background: #1e1e2e !important;
+  color: #98c379 !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-family: 'Fira Code', monospace !important;
+}
+
+main .right pre {
+  background: #1e1e2e !important;
+  padding: 10px !important;
+  border-radius: 6px !important;
+  overflow: auto !important;
+  margin: 8px 0 !important;
+}
+
+main .right pre code {
+  background: transparent !important;
+  padding: 0 !important;
+  color: #abb2bf !important;
+}
+
+main .right hr {
+  border: none !important;
+  border-top: 1px solid #2a2a3a !important;
+  margin: 10px 0 !important;
+}
+
+main .right strong {
   color: #e0e0e0 !important;
+  font-weight: 500 !important;
 }
