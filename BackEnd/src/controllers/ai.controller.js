@@ -7,10 +7,8 @@ exports.getReview = async (req, res) => {
     if (!code) {
       return res.status(400).json({ error: "Code is required" });
     }
-    const review = await generateReview(code);
-
+    const review = await generateReview(code, language || "javascript");
     await Review.create({ code, language, review });
-
     res.json({ review });
   } catch (error) {
     console.error(error);
